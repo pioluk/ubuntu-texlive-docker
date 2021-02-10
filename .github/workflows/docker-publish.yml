@@ -12,7 +12,7 @@ on:
       - v*
 
 env:
-  IMAGE_NAME: pioluk/ubuntu-texlive
+  IMAGE_NAME: ubuntu-texlive
 
 jobs:
   # Run tests.
