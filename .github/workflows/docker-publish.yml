@@ -12,7 +12,8 @@ on:
       - v*
 
 env:
-  IMAGE_NAME: ubuntu-texlive
+  REGISTRY_URL: "ghcr.io"
+  IMAGE_NAME: "ubuntu-texlive"
 
 jobs:
   # Push image to GitHub Packages.
@@ -28,11 +29,11 @@ jobs:
         run: docker build . --file Dockerfile --tag $IMAGE_NAME
 
       - name: Log into registry
-        run: echo "${{ secrets.DOCKER_REGISTRY_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.DOCKER_REGISTRY_TOKEN }}" | docker login $REGISTRY_URL -u ${{ github.actor }} --password-stdin
 
       - name: Push image
         run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+          IMAGE_ID=$REGISTRY_URL/${{ github.repository }}/$IMAGE_NAME
 
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
