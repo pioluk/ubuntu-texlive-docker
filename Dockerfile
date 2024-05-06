@@ -1,4 +1,4 @@
-FROM ubuntu:focal-20240427
+FROM ubuntu:jammy-20240427
 
 ENV DEBIAN_FRONTEND="noninteractive"
 
